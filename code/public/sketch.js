@@ -1,14 +1,22 @@
 let players = [];
 let playerI;
 let startX = 200;
+let objects = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight-5);
+
+  // Players
   for (let i = 0; i < 5; i++) {
     players.push(new Player(startX, ((height/5)*i)+(height/10)));
   }
   playerI = floor(random(players.length));
   players[playerI].colour = color(50, 168, 82);
+
+  // Objects
+  for (let i = 0; i < objects.length; i++) {
+    objects.push
+  }
 }
 
 function draw() {
