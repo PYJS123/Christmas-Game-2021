@@ -12,11 +12,6 @@ function setup() {
   }
   playerI = floor(random(players.length));
   players[playerI].colour = color(50, 168, 82);
-
-  // Objects
-  for (let i = 0; i < objects.length; i++) {
-    objects.push
-  }
 }
 
 function draw() {
