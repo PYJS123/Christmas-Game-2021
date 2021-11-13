@@ -16,6 +16,16 @@ function setup() {
 
 function draw() {
   background(0, 255, 255);
+
+  if (frameCount % 100 == 0 && frameCount > 200) {
+    objects.push(new Thing(width - 50, random(height), Boolean(Math.round(Math.random())), null));
+  }
+
+  for (let i = 0; i < objects.length; i++) {
+    objects[i].update();
+    objects[i].show();
+  }
+
   for (let i = 0; i < players.length; i++) {
     if (players[i].alive) {
       players[i].update(height);

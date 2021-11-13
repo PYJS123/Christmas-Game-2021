@@ -6,11 +6,18 @@ class Thing {
     this.y = y;
   }
 
-  // show() {
-  //   // Use this.img
-  //   if (this.good) {
-  //     fill(255);
-  //     // rect()
-  //   }
-  // }
+  show() {
+    // Use this.img
+    if (this.good) {
+      fill(255);
+      rect(this.x, this.y, 50, 50);
+    } else {
+      fill(0);
+      rect(this.x, this.y, 50, 50);
+    }
+  }
+
+  update() {
+    this.x -= 7;
+  }
 }
