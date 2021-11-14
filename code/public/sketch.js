@@ -18,11 +18,16 @@ function draw() {
   background(0, 255, 255);
 
   if (frameCount % 100 == 0 && frameCount > 200) {
-    objects.push(new Thing(width - 50, random(height), Boolean(Math.round(Math.random())), null));
+    let maxX = -Infinity;
+    for (let i = 0; i < players.length; i++) {
+      maxX = max(maxX, players[i].actual.x);
+    }
+    objects.push(new Thing(maxX - 50, random(50, height-50), Boolean(Math.round(Math.random())), null));
   }
 
   for (let i = 0; i < objects.length; i++) {
     objects[i].update();
+    objects[i].shown.x = objects[i].actual.x - players[playerI].actual.x + width;
     objects[i].show();
   }
 
