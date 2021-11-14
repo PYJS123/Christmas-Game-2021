@@ -19,10 +19,14 @@ class Player {
     this.width = 300;
     this.height = 100;
     this.alive = true;
+
+    this.name = 'Sorntoz is a noice parsiwn';
+    this.lives = 3;
+    this.points = 0;
   }
 
   overlaps(plr) {
-    if ((abs(plr.actual.x - this.actual.x) < this.width) && ((abs(plr.actual.y - this.actual.y) < this.height))) {
+    if ((abs(plr.shown.x - this.shown.x) < ((this.width/2) + (plr.width/2))) && ((abs(plr.shown.y - this.shown.y) < ((this.height/2) + (plr.height/2))))) {
       return true;
     } else {
       return false;

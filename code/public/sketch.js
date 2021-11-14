@@ -17,7 +17,7 @@ function setup() {
 function draw() {
   background(0, 255, 255);
 
-  if (frameCount % 100 == 0 && frameCount > 200) {
+  if (frameCount % 100 == 0 && frameCount > 50) {
     let maxX = -Infinity;
     for (let i = 0; i < players.length; i++) {
       maxX = max(maxX, players[i].actual.x);
@@ -39,11 +39,22 @@ function draw() {
   }
 
   for (let i = 0; i < players.length; i++) {
-    let elt = players[i]
+    let elt = players[i];
     for (let j = i+1; j < players.length; j++) {
       if (elt.overlaps(players[j]) == true) {
         elt.alive = false;
         players[j].alive = false;
+      }
+    }
+    for (let j = objects.length-1; j >= 0; j--) {
+      if (elt.overlaps(objects[j]) == true) {
+        if (objects[j].good == true) {
+          players[i].points += 50;
+          objects.splice(j, 1);
+        } else {
+          players[i].lives -= 1;
+          objects.splice(j, 1);
+        }
       }
     }
   }
