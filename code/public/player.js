@@ -21,8 +21,6 @@ class Player {
     this.alive = true;
 
     this.name = 'Sorntoz is a noice parsiwn';
-    this.lives = 3;
-    this.points = 0;
   }
 
   overlaps(plr) {
@@ -45,7 +43,7 @@ class Player {
     this.acc.x = Math.min(this.acc.x, 0.5);
     this.speed.x += this.acc.x;
     this.speed.x -= 0.07;
-    this.speed.x = constrain(this.speed.x, 0, 17);
+    this.speed.x = constrain(this.speed.x, 0, 14);
     this.actual.x += this.speed.x;
 
     // Dealing with y

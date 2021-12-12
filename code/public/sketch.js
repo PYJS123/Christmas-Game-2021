@@ -1,7 +1,6 @@
 let players = [];
 let playerI;
 let startX = 200;
-let objects = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight-5);
@@ -15,21 +14,7 @@ function setup() {
 }
 
 function draw() {
-  background(0, 255, 255);
-
-  if (frameCount % 100 == 0 && frameCount > 50) {
-    let maxX = -Infinity;
-    for (let i = 0; i < players.length; i++) {
-      maxX = max(maxX, players[i].actual.x);
-    }
-    objects.push(new Thing(maxX - 50, random(50, height-50), Boolean(Math.round(Math.random())), null));
-  }
-
-  for (let i = 0; i < objects.length; i++) {
-    objects[i].update();
-    objects[i].shown.x = objects[i].actual.x - players[playerI].actual.x + width;
-    objects[i].show();
-  }
+  drawBG(players[playerI].actual.x);
 
   for (let i = 0; i < players.length; i++) {
     if (players[i].alive) {
@@ -44,17 +29,6 @@ function draw() {
       if (elt.overlaps(players[j]) == true) {
         elt.alive = false;
         players[j].alive = false;
-      }
-    }
-    for (let j = objects.length-1; j >= 0; j--) {
-      if (elt.overlaps(objects[j]) == true) {
-        if (objects[j].good == true) {
-          players[i].points += 50;
-          objects.splice(j, 1);
-        } else {
-          players[i].lives -= 1;
-          objects.splice(j, 1);
-        }
       }
     }
   }
@@ -97,5 +71,28 @@ function draw() {
   for (let i = 0; i < players.length; i++) {
     let curr = players[i];
     curr.shown.x = curr.actual.x - players[playerI].actual.x + startX;
+  }
+}
+
+function drawBG(off) {
+  background(0, 255, 255);
+  rectMode(CORNER);
+  let w = 100;
+  let df = 170;
+  let roff = (off % (w+10));
+  let roff2 = (off / 2 % (w+10));
+  for (let x = -roff2; x - 50 <= width; x += w + 10) {
+    fill('#077B5E');
+    triangle(x-w/2, height-140-df, x, height-230-df, x+w/2, height-140-df);
+    triangle(x-w/2, height-70-df, x, height-160-df, x+w/2, height-70-df);
+    fill('#2E4C35');
+    rect(x+w/3-w/2, height-70-df, w/3, 70);
+  }
+  for (let x = -roff; x - 50 <= width; x += w + 10) {
+    fill('#086E4E');
+    triangle(x, height-140, x+w/2, height-230, x+w, height-140);
+    triangle(x, height-70, x+w/2, height-160, x+w, height-70);
+    fill('#333A21');
+    rect(x+w/3, height-70, w/3, 70);
   }
 }
