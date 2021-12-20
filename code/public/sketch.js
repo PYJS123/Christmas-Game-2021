@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-  drawBG(players[playerI].actual.x);
+  drawBG(players[playerI].actual.x, width, height);
 
   for (let i = 0; i < players.length; i++) {
     if (players[i].alive) {
@@ -74,8 +74,16 @@ function draw() {
   }
 }
 
-function drawBG(off) {
+function drawBG(off, wi, hi) {
   background(0, 255, 255);
+  // Mountain
+  fill('#4E9393');
+  beginShape();
+  vertex(0, hi)
+  bezierVertex(wi/3, 0, wi/2-100, 0, wi/3*2, 0, wi, hi);
+  endShape();
+
+  // Trees
   rectMode(CORNER);
   let w = 100;
   let df = 170;
